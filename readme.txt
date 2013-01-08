@@ -26,7 +26,7 @@ Email me at brettshumaker@gmail.com with any problems/comments!
 
 1. Upload the `simple-staff-list` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `[staff-member-list]` in a page or post
+1. Place `[simple-staff-list]` in a page or post
 
 == Frequently Asked Questions ==
 
