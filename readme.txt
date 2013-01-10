@@ -19,7 +19,9 @@ There's also a drag-and-drop interface to set the order of your staff members.
 You'll use the `[simple-staff-list]` shortcode within a page or post to display the full staff listing in the order set
 on the "Order" page. You'll be able to customize the information shown for each staff member on your website by editing a simple template. You can add your own custom CSS to style your staff list as well.
 
-Email me at brettshumaker@gmail.com with any problems/comments!
+Use the [Simple Staff List support section](http://wordpress.org/support/plugin/simple-staff-list "Simple Staff List support") to post any problems/comments!
+
+A "Thanks!" to [@adamtootle](http://twitter.com/adamtootle) for the base idea for this plugin. Simple Staff List is a re-work of his [Staff Directory plugin](http://wordpress.org/extend/plugins/staff-directory/).
 
 
 == Installation ==
@@ -30,7 +32,12 @@ Email me at brettshumaker@gmail.com with any problems/comments!
 
 == Frequently Asked Questions ==
 
-= None Yet! Email me at brettshumaker@gmail.com with questions. =
+= My Staff List won't show up on my site! =
+Alright, here's a few things to try:
+* Be sure to make sure you've included the `[simple-staff-list]` shortcode somewhere in a page or post.
+* Double check the "Staff Loop Template" on the plugin's "Templates" page. Make sure all of your tags are located between `[staff_loop]` and `[/staff_loop]`.
+
+[Visit the Simple Staff List support section to ask a question!](http://wordpress.org/support/plugin/simple-staff-list "Simple Staff List support")
 
 == Screenshots ==
 
