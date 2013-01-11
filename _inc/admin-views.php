@@ -222,15 +222,21 @@ function sslp_staff_member_template_page(){
 	
 	// Check Nonce and then update options
 	if ( !empty($_POST) && check_admin_referer( 'staff-member-template', 'staff-list-template' ) ) {
-		//echo("<script>alert('Test passed');</script>");
 		update_option('staff_listing_custom_html', $_POST[ "staff-listing-html"]);
 		update_option('staff_listing_custom_css', $_POST[ "staff-listing-css"]);		
 		$custom_html = stripslashes_deep(get_option('staff_listing_custom_html'));
 		$custom_css = stripslashes_deep(get_option('staff_listing_custom_css'));
-	} else {		
-		//echo("<script>alert('Test FAILED');</script>");
+				
+		// Save custom css to a file in current theme directory
+		$filename = get_stylesheet_directory() . '/simple-staff-list-custom.css';
+		file_put_contents($filename, $custom_css);
+
+	} else {
 		$custom_html = stripslashes_deep(get_option('staff_listing_custom_html'));
-		$custom_css = stripslashes_deep(get_option('staff_listing_custom_css'));
+		
+		// Save custom css to a file in current theme directory
+		$filename = get_stylesheet_directory() . '/simple-staff-list-custom.css';
+		$custom_css = file_get_contents($filename);
 	}
 	
 	$output .= '<div class="wrap sslp-template">';

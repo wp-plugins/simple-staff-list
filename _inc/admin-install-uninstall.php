@@ -111,6 +111,10 @@ h4.staff-member-position {
 	if (!get_option('_staff_listing_default_css')){
 		update_option('_staff_listing_default_css', $default_css);
 		update_option('_staff_listing_custom_css', $default_css);
+		
+		// Save custom css to a file in current theme directory
+		$filename = get_stylesheet_directory() . '/simple-staff-list-custom.css';
+		file_put_contents($filename, $default_css);
 	}
 	
 	flush_rewrite_rules();

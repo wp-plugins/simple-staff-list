@@ -11,13 +11,7 @@ function sslp_staff_member_listing_shortcode_func($atts) {
      $custom_css 				= stripslashes_deep(get_option('staff_listing_custom_css'));
      $default_tags 				= get_option('_staff_listing_default_tags');
      $default_formatted_tags 	= get_option('_staff_listing_default_formatted_tags');
-     
-     
-     // Check to see if we have custom css
-     if ($custom_css != get_option('staff_listing_default_css')){
-	     $output .= '<style type="text/css">'.$custom_css.'</style>';
-     }
-     
+     $output					= '';
      
      // Go ahead and remove [staff_loop] [/staff_loop] from our html template
      $loop_markup = $loop_markup_reset = str_replace("[staff_loop]", "", substr($custom_html, strpos($custom_html, "[staff_loop]"), strpos($custom_html, "[/staff_loop]") - strpos($custom_html, "[staff_loop]")));

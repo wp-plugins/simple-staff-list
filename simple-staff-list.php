@@ -50,19 +50,22 @@ register_uninstall_hook( __FILE__, 'sslp_staff_member_uninstall' );
  */
 
 function sslp_staff_member_admin_print_scripts() {
-
-	//* Scripts
+	//** Admin Scripts
 	wp_enqueue_script( 'staff-member-admin-scripts', STAFFLIST_PATH . '_js/staff-member-admin-scripts.js', array('jquery', 'jquery-ui-sortable' ), '1.0', false  );
-
 }
 
 add_action( 'admin_enqueue_scripts', 'sslp_staff_member_admin_enqueue_styles' );
 
 function sslp_staff_member_admin_enqueue_styles() {
-
-	//** Styles
+	//** Admin Styles
 	wp_enqueue_style ( 'staff-list-css', STAFFLIST_PATH . '_css/admin-staff-list.css' );
+}
 
+add_action( 'init', 'sslp_staff_member_enqueue_styles');
+
+function sslp_staff_member_enqueue_styles(){
+	//** Front-end Style
+	wp_enqueue_style ('staff-list-custom-css', get_stylesheet_directory_uri() . '/simple-staff-list-custom.css' );
 }
 
 
@@ -271,4 +274,23 @@ function sslp_staff_member_register_menu() {
 	// Don't need the javascript on the templates page...don't load it.
 }
 
+
+
+
+
+/*
+// Check to see if our css file is in the current theme directory
+//////////////////////////////*/
+
+$filename = get_stylesheet_directory() . '/simple-staff-list-custom.css';
+if (!file_exists($filename)){
+	// Save custom css to a file in current theme directory
+	//file_put_contents($filename, $custom_css);
+}
+
+function sslp_staff_member_create_css_on_switch_theme($new_theme) {
+    $filename = get_stylesheet_directory() . '/simple-staff-list-custom.css';
+    $custom_css = stripslashes_deep(get_option('staff_listing_custom_css'));
+}
+add_action('switch_theme', 'sslp_staff_member_create_css_on_switch_theme');
 ?>
