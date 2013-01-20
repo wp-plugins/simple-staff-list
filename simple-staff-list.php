@@ -3,7 +3,7 @@
 Plugin Name: Simple Staff List
 Plugin URI: 
 Description: A simple plugin to build and display a staff listing for your website.
-Version: 1.01
+Version: 1.02
 Author: Brett Shumaker
 Author URI: http://www.brettshumaker.com
 */
@@ -36,6 +36,21 @@ include_once('_inc/user-view-show-staff-list.php');
 register_activation_hook( __FILE__, 'sslp_staff_member_activate' );
 register_deactivation_hook( __FILE__, 'sslp_staff_member_deactivate' );
 register_uninstall_hook( __FILE__, 'sslp_staff_member_uninstall' );
+
+// Need to check plugin version here and run sslp_staff_member_plugin_update()
+// function location: /_inc/admin-install-uninstall.php
+if ( ! function_exists( 'get_plugins' ) )
+	require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+$plugin_folder = get_plugins( '/' . plugin_basename( dirname( __FILE__ ) ) );
+$plugin_file = basename( ( __FILE__ ) );
+$plugin_version = $plugin_folder[$plugin_file]['Version'];    
+$sslp_ver_option = get_option('_simple_staff_list_version');
+if ($sslp_ver_option == "" || $sslp_ver_option < $plugin_version){
+	sslp_staff_member_plugin_update($sslp_ver_option, $plugin_version);
+}
+
+// End plugin version check
 
 
 

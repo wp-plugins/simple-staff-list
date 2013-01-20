@@ -142,7 +142,37 @@ function sslp_staff_member_uninstall(){
 	delete_option('_staff_listing_default_css');
 	delete_option('_staff_listing_custom_html');
 	delete_option('_staff_listing_custom_css');
+	delete_option('_simple_staff_list_version');
 
+}
+
+/**
+ * Runs on plugin update
+ * 
+ * Initially created to fix option naming inconsistency in v1.01
+ *
+ */
+function sslp_staff_member_plugin_update($sslp_ver_option, $plugin_version){
+	if ($sslp_ver_option == "" && $plugin_version == "1.01") {
+	
+		$bad_cus_html = get_option('staff_listing_custom_html');
+		$good_cus_html = get_option('_staff_listing_custom_html');
+		$bad_cus_css = get_option('staff_listing_custom_css');
+		$good_cus_css = get_option('_staff_listing_custom_css');
+		
+		if ($bad_cus_html != $good_cus_html)
+			update_option('_staff_listing_custom_html', get_option('staff_listing_custom_html'));
+		
+		if ($bad_cus_css != $good_cus_css)
+			update_option('_staff_listing_custom_css', get_option('staff_listing_custom_css'));
+		
+		delete_option('staff_listing_custom_html');
+		delete_option('staff_listing_custom_css');
+	}
+	
+	update_option('_simple_staff_list_version', $plugin_version);
+	
+	flush_rewrite_rules();
 }
 
 ?>

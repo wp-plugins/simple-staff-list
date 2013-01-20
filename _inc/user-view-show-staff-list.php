@@ -7,14 +7,14 @@ function sslp_staff_member_listing_shortcode_func($atts) {
      
      // Get Template and CSS
      
-     $custom_html 				= stripslashes_deep(get_option('staff_listing_custom_html'));
-     $custom_css 				= stripslashes_deep(get_option('staff_listing_custom_css'));
+     $custom_html 				= stripslashes_deep(get_option('_staff_listing_custom_html'));
+     $custom_css 				= stripslashes_deep(get_option('_staff_listing_custom_css'));
      $default_tags 				= get_option('_staff_listing_default_tags');
      $default_formatted_tags 	= get_option('_staff_listing_default_formatted_tags');
      
      
      // Check to see if we have custom css
-     if ($custom_css != get_option('staff_listing_default_css')){
+     if ($custom_css != get_option('_staff_listing_default_css')){
 	     $output .= '<style type="text/css">'.$custom_css.'</style>';
      }
      

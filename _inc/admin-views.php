@@ -194,8 +194,8 @@ function sslp_staff_member_usage_page() {
 function sslp_staff_member_template_page(){ 
 
 	// Get options for default HTML CSS
-	$default_html = get_option('staff_listing_default_html');
-	$default_css = get_option('staff_listing_default_css');
+	$default_html = get_option('_staff_listing_default_html');
+	$default_css = get_option('_staff_listing_default_css');
 	$default_tag_string = get_option('_staff_listing_default_tag_string');
 	$default_formatted_tag_string = get_option('_staff_listing_default_formatted_tag_string');
 	
@@ -223,14 +223,14 @@ function sslp_staff_member_template_page(){
 	// Check Nonce and then update options
 	if ( !empty($_POST) && check_admin_referer( 'staff-member-template', 'staff-list-template' ) ) {
 		//echo("<script>alert('Test passed');</script>");
-		update_option('staff_listing_custom_html', $_POST[ "staff-listing-html"]);
-		update_option('staff_listing_custom_css', $_POST[ "staff-listing-css"]);		
-		$custom_html = stripslashes_deep(get_option('staff_listing_custom_html'));
-		$custom_css = stripslashes_deep(get_option('staff_listing_custom_css'));
+		update_option('_staff_listing_custom_html', $_POST[ "staff-listing-html"]);
+		update_option('_staff_listing_custom_css', $_POST[ "staff-listing-css"]);		
+		$custom_html = stripslashes_deep(get_option('_staff_listing_custom_html'));
+		$custom_css = stripslashes_deep(get_option('_staff_listing_custom_css'));
 	} else {		
 		//echo("<script>alert('Test FAILED');</script>");
-		$custom_html = stripslashes_deep(get_option('staff_listing_custom_html'));
-		$custom_css = stripslashes_deep(get_option('staff_listing_custom_css'));
+		$custom_html = stripslashes_deep(get_option('_staff_listing_custom_html'));
+		$custom_css = stripslashes_deep(get_option('_staff_listing_custom_css'));
 	}
 	
 	$output .= '<div class="wrap sslp-template">';
