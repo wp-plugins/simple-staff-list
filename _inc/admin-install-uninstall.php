@@ -153,7 +153,7 @@ function sslp_staff_member_uninstall(){
  *
  */
 function sslp_staff_member_plugin_update($sslp_ver_option, $plugin_version){
-	if ($sslp_ver_option == "" && $plugin_version == "1.01") {
+	if ($sslp_ver_option == "" || $plugin_version == "1.01") {
 	
 		$bad_cus_html = get_option('staff_listing_custom_html');
 		$good_cus_html = get_option('_staff_listing_custom_html');
