@@ -4,7 +4,7 @@ Donate link: http://brettshumaker.com/
 Tags: staff list, staff directory, employee list, staff, employee, employees
 Requires at least: 3.0
 Tested up to: 3.5
-Stable tag: 1.01
+Stable tag: 1.02
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,18 @@ Alright, here's a few things to try:
 5. Templates screen 2
 
 == Changelog ==
+
+= 1.10 =
+* FEATURE: You can now sort your Staff Members into Groups! To display different groups just add a Staff Group in Staff Members > Groups then add `group='YOUR-GROUP-NAME'` to the `[simple-staff-list]` shortcode.
+* FEATURE: You can now add a class to the staff-member container! To add a class just add `wrap_class='YOUR-CLASS-NAME'` to the `[simple-staff-list]` shortcode.
+* FEATURE: The plugin now saves your custom CSS to an external file in your theme's directory so you can edit it on the "Templates" page OR in your favorite code editor.
+* UPDATED: Updated default Staff Loop Template and default styling to make your Staff Directory look nicer out-of-the-box.
+* BUGFIX: Trashing a Staff Member no longer causes member information to be lost.
+* BUGFIX: Removed the automatic phone number formatting. My apologies to any non-U.S. users.
+* Other minor tweaks/performance enhances.
+
+= 1.02 =
+* BUGFIX: Corrects a plugin option naming inconsistency which resulted in empty boxes on the Templates page
 
 = 1.01 =
 * I incorrectly tagged release version 1.0 and, as a result, not all files were included in version 1.0 of Simple Staff List.
