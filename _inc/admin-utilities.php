@@ -54,7 +54,7 @@ function get_sslp_terms($tax) {
     
     // Loop through terms to get the names
     foreach($terms as $term) {
-	    array_push($names, $term->name);
+	    array_push($names, strtolower($term->name));
     }
     
     return $names;

@@ -23,7 +23,7 @@ function sslp_staff_member_activate(){
 	
 	$default_template = '
 [staff_loop]
-	<img class="staff-member-photo" src="[staff-photo-url]" alt="[staff-name] : [staff-title]">
+	<img class="staff-member-photo" src="[staff-photo-url]" alt="[staff-name] : [staff-position]">
 	<div class="staff-member-info-wrap">
 		[staff-name-formatted]
 		[staff-position-formatted]
@@ -286,7 +286,7 @@ div.staff-member { display: block; }
 
 $default_template = '
 [staff_loop]
-	<img class="staff-member-photo" src="[staff-photo-url]" alt="[staff-name] : [staff-title]">
+	<img class="staff-member-photo" src="[staff-photo-url]" alt="[staff-name] : [staff-position]">
 	<div class="staff-member-info-wrap">
 		[staff-name-formatted]
 		[staff-position-formatted]

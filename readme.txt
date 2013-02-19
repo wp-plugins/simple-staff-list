@@ -4,7 +4,7 @@ Donate link: http://brettshumaker.com/
 Tags: staff list, staff directory, employee list, staff, employee, employees
 Requires at least: 3.0
 Tested up to: 3.5
-Stable tag: 1.10
+Stable tag: 1.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,9 @@ Alright, here's a few things to try:
 5. Templates screen 2
 
 == Changelog ==
+
+= 1.11 =
+* BUGFIX: Fixed minor bug which caused groups to not function properly. My bad.
 
 = 1.10 =
 * FEATURE: You can now sort your Staff Members into Groups! To display different groups just add a Staff Group in Staff Members > Groups then add `group='YOUR-GROUP-NAME'` to the `[simple-staff-list]` shortcode.
