@@ -17,13 +17,13 @@ function sslp_staff_member_listing_shortcode_func($atts) {
 	$output						= '';
 	$group						= strtolower($group);
 	$order						= strtoupper($order);
-	
+	$staff = '';
 	
 	/**
 	  * Set up our WP_Query
 	  */
 	
-	$args = array( 'post_type' => 'staff-member', 'posts_per_page' => -1, 'orderby' => 'menu_order' );
+	$args = array( 'post_type' => 'staff-member', 'posts_per_page' => -1, 'orderby' => 'menu_order', 'post_status' => 'publish' );
 	
 	// Check user's 'order' value
 	if ($order != 'ASC' && $order != 'DESC') {
@@ -72,8 +72,11 @@ function sslp_staff_member_listing_shortcode_func($atts) {
 			$output .= '<div class="staff-member even '.$staff_member_classes.'">';
 		}
 		
+		global $post;
+		
 		$custom 	= get_post_custom();
 		$name 		= get_the_title();
+		$name_slug	= basename(get_permalink());
 		$title 		= $custom["_staff_member_title"][0];
 		$email 		= $custom["_staff_member_email"][0];
 		$phone 		= $custom["_staff_member_phone"][0];
@@ -100,7 +103,7 @@ function sslp_staff_member_listing_shortcode_func($atts) {
 		$email_nolink = antispambot( $email );
 		
 		$accepted_single_tags = $default_tags;
-		$replace_single_values = array($name, $photo_url, $title, $email_nolink, $phone, $bio);
+		$replace_single_values = array($name, $name_slug, $photo_url, $title, $email_nolink, $phone, $bio);
 	
 		$accepted_formatted_tags = $default_formatted_tags;
 		$replace_formatted_values = array('<h3 class="staff-member-name">'.$name.'</h3>', '<h4 class="staff-member-position">'.$title.'</h4>', $photo, $email_mailto, $bio_format);

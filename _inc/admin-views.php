@@ -245,14 +245,29 @@ function sslp_staff_member_template_page(){
 	} else {
 		$custom_html = stripslashes_deep(get_option('_staff_listing_custom_html'));
 		
-		// Save custom css to a file in current theme directory
-		$filename = get_stylesheet_directory() . '/simple-staff-list-custom.css';
-		if (!file_exists($filename)){
-			$custom_css = stripslashes_deep(get_option('_staff_listing_custom_css'));
-		    file_put_contents($filename, $custom_css);
-		} else {
-			$custom_css = file_get_contents($filename);
+		if ($custom_css == '') {
+			$filename = get_stylesheet_directory() . '/simple-staff-list-custom.css';
+			
+			if (file_exists($filename)){
+				$custom_css = file_get_contents($filename);
+				update_option('_staff_listing_custom_css', $custom_css);
+			} else {
+				$custom_css  = stripslashes_deep(get_option('_staff_listing_default_css'));
+				update_option('_staff_listing_custom_css', $custom_css);
+				file_put_contents($filename, 'templates'.$custom_css);
+			}
 		}
+		
+		$custom_css = file_get_contents($filename);
+		
+		// Save custom css to a file in current theme directory
+		//$filename = get_stylesheet_directory() . '/simple-staff-list-custom.css';
+		//if (!file_exists($filename)){
+		//	$custom_css = stripslashes_deep(get_option('_staff_listing_custom_css'));
+		//  file_put_contents($filename, $custom_css);
+		//} else {
+		//	$custom_css = file_get_contents($filename);
+		//}
 	}
 	
 	$output .= '<div class="wrap sslp-template">';

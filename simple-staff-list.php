@@ -3,7 +3,7 @@
 Plugin Name: Simple Staff List
 Plugin URI: 
 Description: A simple plugin to build and display a staff listing for your website.
-Version: 1.11
+Version: 1.12
 Author: Brett Shumaker
 Author URI: http://www.brettshumaker.com
 */
@@ -46,7 +46,7 @@ $plugin_folder = get_plugins( '/' . plugin_basename( dirname( __FILE__ ) ) );
 $plugin_file = basename( ( __FILE__ ) );
 $plugin_version = $plugin_folder[$plugin_file]['Version'];    
 $sslp_ver_option = get_option('_simple_staff_list_version');
-if ($sslp_ver_option == "" || $sslp_ver_option < $plugin_version){
+if ($sslp_ver_option == "" || $sslp_ver_option <= $plugin_version){
 	sslp_staff_member_plugin_update($sslp_ver_option, $plugin_version);
 }
 
@@ -76,6 +76,8 @@ function sslp_staff_member_admin_enqueue_styles() {
 	//** Admin Styles
 	wp_register_style( 'staff-list-css', STAFFLIST_PATH . '_css/admin-staff-list.css' );
 	wp_enqueue_style ( 'staff-list-css' );
+	
+	flush_rewrite_rules();
 }
 
 add_action( 'init', 'sslp_staff_member_enqueue_styles');
@@ -126,6 +128,7 @@ function sslp_staff_member_init() {
         'has_archive' => true,
         'hierarchical' => false,
         'menu_position' => 100,
+        'rewrite' => array('slug'=>'staff-members','with_front'=>false),
         'supports' => array( 'title', 'thumbnail', 'excerpt' )
     );
 
