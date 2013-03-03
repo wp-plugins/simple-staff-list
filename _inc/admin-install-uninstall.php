@@ -19,7 +19,7 @@
  * @param    array     $default_formatted_tag_string  	stores imploded, comma delimited $default_formatted_tags
  * 
  */
-function sslp_staff_member_activate(){
+function sslp_staff_member_activate($is_forced){
 	
 	$default_template = '
 [staff_loop]
@@ -110,44 +110,41 @@ div.staff-member:after {
 div.staff-member { display: block; }
 ';
 	
-	$default_tags = array('[staff-name]', '[staff-photo-url]', '[staff-position]', '[staff-email]', '[staff-phone]', '[staff-bio]');
+	$default_tags = array('[staff-name]', '[staff-name-slug]', '[staff-photo-url]', '[staff-position]', '[staff-email]', '[staff-phone]', '[staff-bio]');
 	$default_tag_string = implode(", ", $default_tags);
 	
 	$default_formatted_tags = array('[staff-name-formatted]', '[staff-position-formatted]', '[staff-photo]', '[staff-email-link]', '[staff-bio-formatted]');
 	$default_formatted_tag_string = implode(", ", $default_formatted_tags);
 	
-	if (!get_option('_staff_listing_default_tags')){
-		update_option('_staff_listing_default_tags', $default_tags );
-	}
+	update_option('_staff_listing_default_tags', $default_tags );
+	update_option('_staff_listing_default_tag_string', $default_tag_string);
+	update_option('_staff_listing_default_formatted_tags', $default_formatted_tags );
+	update_option('_staff_listing_default_formatted_tag_string', $default_formatted_tag_string);
+	update_option('_staff_listing_default_html', $default_template);
+	update_option('_staff_listing_default_css', $default_css);
 	
-	if (!get_option('_staff_listing_default_tag_string')){
-		update_option('_staff_listing_default_tag_string', $default_tag_string);
-	}
 	
-	if (!get_option('_staff_listing_default_formatted_tags')){
-		update_option('_staff_listing_default_formatted_tags', $default_formatted_tags );
-	}
-	
-	if (!get_option('_staff_listing_default_formatted_tag_string')){
-		update_option('_staff_listing_default_formatted_tag_string', $default_formatted_tag_string);
-	}
-	
-	if (!get_option('_staff_listing_default_html')){
-		update_option('_staff_listing_default_html', $default_template);
+	if (!get_option('_staff_listing_custom_html')){
 		update_option('_staff_listing_custom_html', $default_template);
 	}
 	
-	if (!get_option('_staff_listing_default_css')){
-		update_option('_staff_listing_default_css', $default_css);
-		update_option('_staff_listing_custom_css', $default_css);
+	$filename = get_stylesheet_directory() . '/simple-staff-list-custom.css';
+	
+	if (!get_option('_staff_listing_custom_css') && !file_exists($filename)){
+		update_option('_staff_listing_custom_css', get_option('_staff_listing_default_css'));
 		
 		// Save custom css to a file in current theme directory
-		$filename = get_stylesheet_directory() . '/simple-staff-list-custom.css';
-		file_put_contents($filename, $default_css);
+		file_put_contents($filename, get_option('_staff_listing_default_css'));
+	} else if (file_exists($filename)) {
+		$custom_css = file_get_contents($filename);
+		update_option('_staff_listing_custom_css', $custom_css);
 	}
 	
-	flush_rewrite_rules();
+	if ($is_forced != 'forced activation'){
+		flush_rewrite_rules();
+	}
 }
+
 
 
 /**
@@ -206,7 +203,9 @@ function sslp_staff_member_plugin_update($sslp_ver_option, $plugin_version){
 	
 	// Updating the default CSS and Template
 	
-	$default_css = '
+	if ($sslp_ver_option == "" || $plugin_version <= "1.10") {
+	
+		$default_css = '
 /*  div wrapped around entire staff list  */
 div.staff-member-listing {
 
@@ -284,7 +283,7 @@ div.staff-member:after {
 div.staff-member { display: block; }
 ';
 
-$default_template = '
+		$default_template = '
 [staff_loop]
 	<img class="staff-member-photo" src="[staff-photo-url]" alt="[staff-name] : [staff-position]">
 	<div class="staff-member-info-wrap">
@@ -296,17 +295,21 @@ $default_template = '
 [/staff_loop]
 ';
 	
-	$filename = get_stylesheet_directory() . '/simple-staff-list-custom.css';
-	if (!file_exists($filename)){
-		// Save custom css to a file in current theme directory
-		$custom_css = stripslashes_deep(get_option('_staff_listing_custom_css'));
-		file_put_contents($filename, $custom_css);
-	}
+		$filename = get_stylesheet_directory() . '/simple-staff-list-custom.css';
+		if (!file_exists($filename)){
+			// Save custom css to a file in current theme directory
+			$custom_css = stripslashes_deep(get_option('_staff_listing_custom_css'));
+			file_put_contents($filename, $custom_css);
+		}
+		
+		update_option('_staff_listing_default_html', $default_template);
+		update_option('_staff_listing_default_css', $default_css);
+
 	
-	update_option('_staff_listing_default_html', $default_template);
-	update_option('_staff_listing_default_css', $default_css);
-	
+	}	
+		
 	update_option('_simple_staff_list_version', $plugin_version);
+	sslp_staff_member_activate('forced activation');
 }
 
 ?>
