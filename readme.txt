@@ -4,7 +4,7 @@ Donate link: http://brettshumaker.com/
 Tags: staff list, staff directory, employee list, staff, employee, employees
 Requires at least: 3.0
 Tested up to: 3.5
-Stable tag: 1.11
+Stable tag: 1.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,10 @@ Alright, here's a few things to try:
 5. Templates screen 2
 
 == Changelog ==
+
+= 1.12 =
+* UPDATED: Staff Loop Template tags now include `[staff-name-slug]` returns the slug of the staff member to allow specific targeting of staff members.
+* BUGFIX: Fixed bug where the Staff Loop Template and the Staff Page CSS boxes were blank on initial install.
 
 = 1.11 =
 * BUGFIX: Fixed minor bug which caused groups to not function properly. My bad.
