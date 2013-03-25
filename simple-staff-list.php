@@ -3,7 +3,7 @@
 Plugin Name: Simple Staff List
 Plugin URI: 
 Description: A simple plugin to build and display a staff listing for your website.
-Version: 1.12
+Version: 1.13
 Author: Brett Shumaker
 Author URI: http://www.brettshumaker.com
 */
@@ -80,12 +80,14 @@ function sslp_staff_member_admin_enqueue_styles() {
 	flush_rewrite_rules();
 }
 
-add_action( 'init', 'sslp_staff_member_enqueue_styles');
+add_action( 'wp_enqueue_scripts', 'sslp_staff_member_enqueue_styles');
 
 function sslp_staff_member_enqueue_styles(){
 	//** Front-end Style
-	wp_register_style( 'staff-list-custom-css', get_stylesheet_directory_uri() . '/simple-staff-list-custom.css' );
-	wp_enqueue_style ( 'staff-list-custom-css' );
+	if (get_option('_staff_listing_write_external_css') == "yes") {
+		wp_register_style( 'staff-list-custom-css', get_stylesheet_directory_uri() . '/simple-staff-list-custom.css' );
+		wp_enqueue_style ( 'staff-list-custom-css' );
+	}
 }
 
 
@@ -337,19 +339,12 @@ function sslp_staff_member_register_menu() {
 // Make Sure We Add The Custom CSS File on Theme Switch
 //////////////////////////////*/
 
-/*$filename = get_stylesheet_directory() . '/simple-staff-list-custom.css';
-if (!file_exists($filename)){
-	// Save custom css to a file in current theme directory
-	$custom_css = stripslashes_deep(get_option('_staff_listing_custom_css'));
-	//file_put_contents($filename, $custom_css);
-	
-}
-*/
-
 function sslp_staff_member_create_css_on_switch_theme($new_theme) {
     $filename = get_stylesheet_directory() . '/simple-staff-list-custom.css';
     $custom_css = get_option('_staff_listing_custom_css');
     file_put_contents($filename, $custom_css);
 }
-add_action('switch_theme', 'sslp_staff_member_create_css_on_switch_theme');
+if ( get_option('_staff_listing_write_external_css') == 'yes' ){
+	add_action('switch_theme', 'sslp_staff_member_create_css_on_switch_theme');
+}
 ?>

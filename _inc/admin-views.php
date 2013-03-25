@@ -205,14 +205,13 @@ function sslp_staff_member_usage_page() {
 function sslp_staff_member_template_page(){ 
 
 	// Get options for default HTML CSS
-	$default_html = get_option('_staff_listing_default_html');
-	$default_css = get_option('_staff_listing_default_css');
-	$default_tag_string = get_option('_staff_listing_default_tag_string');
-	$default_formatted_tag_string = get_option('_staff_listing_default_formatted_tag_string');
-	
-	
-	$default_tags 				= get_option('_staff_listing_default_tags');
-    $default_formatted_tags 	= get_option('_staff_listing_default_formatted_tags');
+	$default_html 					= get_option('_staff_listing_default_html');
+	$default_css 					= get_option('_staff_listing_default_css');
+	$default_tag_string 			= get_option('_staff_listing_default_tag_string');
+	$default_formatted_tag_string 	= get_option('_staff_listing_default_formatted_tag_string');
+	$default_tags 					= get_option('_staff_listing_default_tags');
+    $default_formatted_tags 		= get_option('_staff_listing_default_formatted_tags');
+    $write_external_css				= get_option('_staff_listing_write_external_css');
     
     $default_tag_ul  = '<ul class="sslp-tag-list">';
     
@@ -234,40 +233,46 @@ function sslp_staff_member_template_page(){
 	// Check Nonce and then update options
 	if ( !empty($_POST) && check_admin_referer( 'staff-member-template', 'staff-list-template' ) ) {
 		update_option('_staff_listing_custom_html', $_POST[ "staff-listing-html"]);
-		update_option('_staff_listing_custom_css', $_POST[ "staff-listing-css"]);		
+		update_option('_staff_listing_custom_css', $_POST[ "staff-listing-css"]);
+		
 		$custom_html = stripslashes_deep(get_option('_staff_listing_custom_html'));
 		$custom_css = stripslashes_deep(get_option('_staff_listing_custom_css'));
-				
-		// Save custom css to a file in current theme directory
-		$filename = get_stylesheet_directory() . '/simple-staff-list-custom.css';
-		file_put_contents($filename, $custom_css);
+		
+		if ( $_POST[ "write-external-css" ] != "yes" ) {
+			update_option('_staff_listing_write_external_css', "no");
+			$write_external_css = "no";
+		} else {
+			update_option('_staff_listing_write_external_css', $_POST[ "write-external-css" ]);
+			$write_external_css = "yes";
+			
+			// User wants to write to external CSS file, do it.
+			$filename = get_stylesheet_directory() . '/simple-staff-list-custom.css';
+			file_put_contents($filename, $custom_css);
+		}
+
 
 	} else {
 		$custom_html = stripslashes_deep(get_option('_staff_listing_custom_html'));
 		
-		if ($custom_css == '') {
+		if ( $write_external_css == "yes" ) {
+		
 			$filename = get_stylesheet_directory() . '/simple-staff-list-custom.css';
-			
+				
 			if (file_exists($filename)){
 				$custom_css = file_get_contents($filename);
 				update_option('_staff_listing_custom_css', $custom_css);
 			} else {
 				$custom_css  = stripslashes_deep(get_option('_staff_listing_default_css'));
 				update_option('_staff_listing_custom_css', $custom_css);
-				file_put_contents($filename, 'templates'.$custom_css);
+				file_put_contents($filename, $custom_css);
 			}
+		} else {
+			$custom_css = stripslashes_deep(get_option('_staff_listing_custom_css'));
 		}
-		
-		$custom_css = file_get_contents($filename);
-		
-		// Save custom css to a file in current theme directory
-		//$filename = get_stylesheet_directory() . '/simple-staff-list-custom.css';
-		//if (!file_exists($filename)){
-		//	$custom_css = stripslashes_deep(get_option('_staff_listing_custom_css'));
-		//  file_put_contents($filename, $custom_css);
-		//} else {
-		//	$custom_css = file_get_contents($filename);
-		//}
+	}
+	
+	if ( $write_external_css == 'yes' ){
+		$ext_css_check = "checked";
 	}
 	
 	$output .= '<div class="wrap sslp-template">';
@@ -303,6 +308,8 @@ function sslp_staff_member_template_page(){
     $output .= '<p><input type="submit" value="Save ALL Changes" class="button button-primary button-large"></p><br /><br />';
     
     $output .= '<h3>Staff Page CSS</h3>';
+    
+    $output .= '<p><input type="checkbox" name="write-external-css" id="write-external-css" value="yes" '.$ext_css_check.' /><label for="write-external-css"> Write to external CSS file? (Leave unchecked for WP Multisite.)</label>';
     
     $output .= '<div class="default-css">
     				<h4 class="heading button-secondary">View Default CSS</h4>

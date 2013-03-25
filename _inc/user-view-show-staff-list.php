@@ -19,6 +19,8 @@ function sslp_staff_member_listing_shortcode_func($atts) {
 	$order						= strtoupper($order);
 	$staff = '';
 	
+	$use_external_css			= get_option('_staff_listing_write_external_css');
+	
 	/**
 	  * Set up our WP_Query
 	  */
@@ -32,13 +34,7 @@ function sslp_staff_member_listing_shortcode_func($atts) {
 	
 	// Set 'order' in our query args
 	$args['order'] = $order;
-	
-	// Check user's 'group' value
-	$group_terms = get_sslp_terms('staff-member-group');
-	if (in_array($group, $group_terms)){
-		// if it's an actual term, set it in query args
-		$args['staff-member-group'] = $group;
-	}
+	$args['staff-member-group'] = $group;
 	
 	$staff = new WP_Query( $args );
 	
@@ -53,6 +49,10 @@ function sslp_staff_member_listing_shortcode_func($atts) {
 	// Doing this so I can concatenate class names for current and possibly future use.
 	$staff_member_classes = $wrap_class;
 	
+	// Prepare to output styles if not using external style sheet
+	if ( $use_external_css == "no" ) {
+		$style_output = '<style>'.$custom_css.'</style>';
+	}
 	
 	$i = 0;
 	
@@ -125,6 +125,11 @@ function sslp_staff_member_listing_shortcode_func($atts) {
 	
 	$output .= "</div> <!-- Close staff-member-listing -->";
 	}
+	
+	wp_reset_query();
+	
+	$output = $style_output.$output;
+	
 	return $output;
 }
 add_shortcode('simple-staff-list', 'sslp_staff_member_listing_shortcode_func');

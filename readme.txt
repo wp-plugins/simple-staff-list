@@ -4,7 +4,7 @@ Donate link: http://brettshumaker.com/
 Tags: staff list, staff directory, employee list, staff, employee, employees
 Requires at least: 3.0
 Tested up to: 3.5
-Stable tag: 1.12
+Stable tag: 1.13
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,13 @@ Alright, here's a few things to try:
 5. Templates screen 2
 
 == Changelog ==
+
+= 1.13 =
+* NOTE: If you like using my plugin and want to make sure I can still devote some time to updating it with new features, why not head over to [my website](http://brettshumaker.com) and make a donation? I'd really appreciate it!!
+* FEATURE: Users now have the option to write their custom CSS to an external file (on by default). This allows Multisite users to write their custom styles inline.
+* UPDATED: You can now use either the group name (i.e. "My Cool Group") OR the group slug (i.e. "my-cool-group") in the Simple Staff List shortcode.
+* UPDATED: Passing an empty or non-existent group name no longer results in returning all staff members
+* BUGFIX: Fixed bug where the Staff Loop Template and the Staff Page CSS boxes were blank on initial install...for real this time, guys.
 
 = 1.12 =
 * UPDATED: Staff Loop Template tags now include `[staff-name-slug]` returns the slug of the staff member to allow specific targeting of staff members.

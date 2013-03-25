@@ -306,7 +306,11 @@ div.staff-member { display: block; }
 		update_option('_staff_listing_default_css', $default_css);
 
 	
-	}	
+	}
+	
+	if ($sslp_ver_option == "" || $plugin_version <= "1.12") {
+		update_option('_staff_listing_write_external_css', "yes");
+	}
 		
 	update_option('_simple_staff_list_version', $plugin_version);
 	sslp_staff_member_activate('forced activation');
