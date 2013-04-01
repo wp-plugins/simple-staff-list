@@ -24,7 +24,7 @@
 	top: -0em;
 }
 
-#post-body-content {
+.edit-page-staff-member #post-body-content {
 	margin-bottom: 0; /* Tightens up spacing between title bar and our custom meta boxes */
 }
 
@@ -34,6 +34,15 @@
 
 .wrap.sslp-template p {
 	width:60%;
+}
+
+.sslp-usage table {
+	width: 140%;
+}
+
+.sslp-usage table td {
+	padding:.75em 0;
+	vertical-align: top;
 }
 
 p.sslp-note {
@@ -58,6 +67,27 @@ td.column-order img {
 	cursor: hand;
 }
 
+.sslp-template h4.heading {
+	margin-bottom: 0;
+}
+
+.sslp-template .content {
+	width: 60%;
+	display: none;
+}
+
+.sslp-template pre {
+	background: #eee;
+	padding: 1%;
+	border-radius: 3px;
+	border: thin solid #ccc;
+	overflow: auto;
+}
+
+.sslp-template .default-css .content pre{
+	height: 250px;
+	overflow: scroll;
+}
 
 
 /*
