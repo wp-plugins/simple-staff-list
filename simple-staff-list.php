@@ -3,7 +3,7 @@
 Plugin Name: Simple Staff List
 Plugin URI: 
 Description: A simple plugin to build and display a staff listing for your website.
-Version: 1.13
+Version: 1.14
 Author: Brett Shumaker
 Author URI: http://www.brettshumaker.com
 */
@@ -232,8 +232,11 @@ add_action('do_meta_boxes', 'sslp_staff_member_featured_image_text');
 function sslp_staff_member_featured_image_text() {
 
     remove_meta_box( 'postimagediv', 'staff-member', 'side' );
-
-    add_meta_box('postimagediv', __('Staff Photo'), 'post_thumbnail_meta_box', 'staff-member', 'normal', 'high');
+    if (current_theme_supports('post-thumbnails')) {
+	    add_meta_box('postimagediv', __('Staff Photo'), 'post_thumbnail_meta_box', 'staff-member', 'normal', 'high');
+	} else {
+		add_meta_box('staff-member-warning', __('Staff Photo'), 'sslp_staff_member_warning_meta_box', 'staff-member', 'normal', 'high');
+	}
 }
 
 

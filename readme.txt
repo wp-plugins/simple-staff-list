@@ -4,7 +4,7 @@ Donate link: http://brettshumaker.com/
 Tags: staff list, staff directory, employee list, staff, employee, employees
 Requires at least: 3.0
 Tested up to: 3.5
-Stable tag: 1.13
+Stable tag: 1.14
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,10 @@ Alright, here's a few things to try:
 5. Templates screen 2
 
 == Changelog ==
+
+= 1.14 =
+* UPDATED: Now I check to make sure the theme supports post thumbnails and display a warning message on the Add/Edit screen
+* UPDATED: Minor CSS fix for admin screens
 
 = 1.13 =
 * NOTE: If you like using my plugin and want to make sure I can still devote some time to updating it with new features, why not head over to [my website](http://brettshumaker.com) and make a donation? I'd really appreciate it!!

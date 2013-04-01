@@ -24,7 +24,7 @@
 	top: -0em;
 }
 
-#post-body-content {
+.edit-page-staff-member #post-body-content {
 	margin-bottom: 0; /* Tightens up spacing between title bar and our custom meta boxes */
 }
 
