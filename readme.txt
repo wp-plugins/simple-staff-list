@@ -4,7 +4,7 @@ Donate link: http://brettshumaker.com/
 Tags: staff list, staff directory, employee list, staff, employee, employees
 Requires at least: 3.0
 Tested up to: 3.5
-Stable tag: 1.14
+Stable tag: 1.15
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,14 @@ Alright, here's a few things to try:
 5. Templates screen 2
 
 == Changelog ==
+
+= 1.15 =
+* UPDATED: Added Facebook and Twitter fields for Staff Members
+* UPDATED: Added support for WYSIWYG editor for Staff Bio.
+* UPDATED: Added support for shortcodes within Staff Loop Template and/or Staff Bio field.
+* UPDATED: Removed HTML comments that caused some themes to add an extra <p> tag.
+* BUGFIX: Added post-thumbnail support for 'staff-member' custom post type. Themes that only added post-thumbnail support for 'posts' weren't able to save featured images.
+* BUGFIX: Fixed a rare bug that caused an error on some hosting setups ("Can't Resolve Host" error).
 
 = 1.14 =
 * UPDATED: Now I check to make sure the theme supports post thumbnails and display a warning message on the Add/Edit screen
