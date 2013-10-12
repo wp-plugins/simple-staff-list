@@ -49,6 +49,9 @@ Alright, here's a few things to try:
 
 == Changelog ==
 
+= 1.16 =
+* UPDATED: Added translation support. (Thanks to grappler on GitHub)
+
 = 1.15 =
 * UPDATED: Added Facebook and Twitter fields for Staff Members
 * UPDATED: Added support for WYSIWYG editor for Staff Bio.
