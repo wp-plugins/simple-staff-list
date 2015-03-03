@@ -3,8 +3,8 @@ Contributors: brettshumaker
 Donate link: http://brettshumaker.com/
 Tags: staff list, staff directory, employee list, staff, employee, employees
 Requires at least: 3.0
-Tested up to: 3.5
-Stable tag: 1.15
+Tested up to: 4.1.1
+Stable tag: 1.16
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,6 +51,10 @@ Alright, here's a few things to try:
 
 = 1.16 =
 * UPDATED: Added translation support. (Thanks to grappler on GitHub)
+* UPDATED: Added some template tags to make it easier to access staff member data on a single staff member page (single-staff-member.php) - github pull request #2 from patrickhempel
+* UPDATED: Added option to set a custom URL slug and taxonomy name - github pull request #4 from kaymmm
+* BUGFIX: Fixed a ton of PHP Notices - github issue #2 from asacolips
+* BUGFIX: Menu Icon in WordPress 3.8+
 
 = 1.15 =
 * UPDATED: Added Facebook and Twitter fields for Staff Members
